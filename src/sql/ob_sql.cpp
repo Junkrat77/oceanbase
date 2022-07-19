@@ -1402,10 +1402,12 @@ int ObSql::generate_stmt(ParseResult &parse_result, ObPlanCacheCtx *pc_ctx, ObSq
 
     ObResolver resolver(resolver_ctx);
     NG_TRACE(resolve_begin);
-
-    ret = resolver.resolve(ObResolver::IS_NOT_PREPARED_STMT, *parse_result.result_tree_->children_[0], stmt);
     ObItemType resolve_type = parse_result.result_tree_->children_[0]->type_;
     switch (resolve_type) {
+      case T_HELP: {
+        LOG_INFO("query_help: ",K(parse_result.result_tree_->children_[0]->str_value_));
+        break;
+      }
       case T_CREATE_USER:
       case T_SET_PASSWORD:
       case T_GRANT:
@@ -1421,6 +1423,7 @@ int ObSql::generate_stmt(ParseResult &parse_result, ObPlanCacheCtx *pc_ctx, ObSq
         break;
       }
     }
+    ret = resolver.resolve(ObResolver::IS_NOT_PREPARED_STMT, *parse_result.result_tree_->children_[0], stmt);
     // set const param constraint after resolving
     context.all_plan_const_param_constraints_ = &(resolver_ctx.query_ctx_->all_plan_const_param_constraints_);
     context.all_possible_const_param_constraints_ = &(resolver_ctx.query_ctx_->all_possible_const_param_constraints_);
@@ -1525,7 +1528,7 @@ int ObSql::generate_physical_plan(ParseResult &parse_result, ObPlanCacheCtx *pc_
   if (OB_FAIL(sanity_check(sql_ctx))) {  // check sql_ctx.session_info_ and sql_ctx.schema_guard_
     LOG_WARN("Failed to do sanity check", K(ret));
   } else if (OB_FAIL(generate_stmt(parse_result, pc_ctx, sql_ctx, allocator, result, basic_stmt))) {
-    LOG_WARN("Failed to generate stmt", K(ret), K(result.get_exec_context().need_disconnect()));
+    LOG_WARN("Failed to generate stmt", K(ret), K(result.get_exec_context().need_disconnect())); /* 生成statment */
   } else if (OB_ISNULL(basic_stmt)) {
     ret = OB_ERR_UNEXPECTED;
     LOG_WARN("Generate stmt success, but stmt is NULL", K(ret));

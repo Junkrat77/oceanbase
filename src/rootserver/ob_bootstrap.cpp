@@ -53,6 +53,7 @@
 #include "observer/ob_server_struct.h"
 #include "share/ob_multi_cluster_util.h"
 #include "rootserver/ob_freeze_info_manager.h"
+#include "../fill_help_table.h"
 
 namespace oceanbase {
 
@@ -1630,6 +1631,8 @@ int ObBootstrap::init_system_data(const uint64_t server_id)
     LOG_WARN("init server id failed", K(server_id), K(ret));
   } else if (OB_FAIL(init_all_zone_table())) {
     LOG_WARN("failed to init all zone table", K(ret));
+  } else if (OB_FAIL(init_all_help_table())) { /* init help table in oceanbase database */
+    LOG_WARN("failed to init all help table", K(ret));
   } else if (OB_FAIL(insert_first_freeze_schema())) {
     LOG_WARN("fail to insert first freeze schema", KR(ret));
   }
@@ -2005,6 +2008,45 @@ int ObBootstrap::init_all_zone_table()
   }
 
   LOG_INFO("init all zone table", K(ret));
+  BOOTSTRAP_CHECK_SUCCESS();
+  return ret;
+}
+
+// static const char **cmds[] = {fill_help_tables, nullptr};
+
+int ObBootstrap::init_all_help_table() {
+  int ret = OB_SUCCESS;
+  common::ObMySQLTransaction trans;
+  LOG_INFO("[gq]: init all zone table start", K(ret));
+  ObMySQLProxy& sql_proxy = ddl_service_.get_sql_proxy();
+  if (OB_FAIL(check_inner_stat())) {
+    LOG_WARN("check_inner_stat failed", K(ret));
+  } else if (OB_FAIL(trans.start(&sql_proxy))) {
+    LOG_WARN("failed to start trans", K(ret));
+  } else {
+    ObSqlString sql;
+    int64_t affected_rows = 0;
+    for(const char** iter = &fill_help_tables_cmd[0]; *iter != NULL; iter++) {
+      LOG_INFO("[gq]: init help table sql", K(*iter));
+      if (OB_FAIL(sql.assign(*iter))) {
+        LOG_WARN("assign sql failed", K(ret));
+      } if (OB_FAIL(trans.write(sql.ptr(), affected_rows))) {
+        LOG_WARN("execute sql failed", K(ret), K(sql));
+      } else if (!(is_single_row(affected_rows) || is_zero_row(affected_rows))) {
+        ret = OB_ERR_UNEXPECTED;
+        LOG_WARN("unexpected affected rows", K(ret), K(affected_rows));
+      } else {
+        LOG_TRACE("execute sql success", K(sql));
+      }
+    }
+    
+    int tmp_ret = trans.end(OB_SUCC(ret));
+    if (OB_SUCCESS != tmp_ret) {
+      LOG_WARN("end transaction failed", K(tmp_ret), K(ret));
+      ret = OB_SUCCESS == ret ? tmp_ret : ret;
+    }
+  }
+  LOG_INFO("init all help table successfully", K(ret));
   BOOTSTRAP_CHECK_SUCCESS();
   return ret;
 }

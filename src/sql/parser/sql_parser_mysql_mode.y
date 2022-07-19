@@ -164,7 +164,7 @@ END_P SET_VAR DELIMITER
         EACH ELSE ELSEIF ENCLOSED ESCAPED EXISTS EXIT EXPLAIN
         /*FALSE*/ FETCH FLOAT FLOAT4 FLOAT8 FOR FORCE FOREIGN FROM
         GENERATED GET GRANT GROUP
-        HAVING HIGH_PRIORITY HOUR_MICROSECOND HOUR_MINUTE HOUR_SECOND
+        HAVING HELP HIGH_PRIORITY HOUR_MICROSECOND HOUR_MINUTE HOUR_SECOND
         IF IGNORE IN INDEX INFILE INNER INOUT INSENSITIVE INSERT INT INT1 INT2 INT3 INT4 INT8 INTEGER
         INTERVAL INTO IO_AFTER_GTIDS IO_BEFORE_GTIDS IS ITERATE
         JOIN
@@ -225,7 +225,7 @@ END_P SET_VAR DELIMITER
         GENERAL GEOMETRY GEOMETRYCOLLECTION GET_FORMAT GLOBAL GRANTS GROUP_CONCAT GROUPING GTS
         GLOBAL_NAME GLOBAL_ALIAS
 
-        HANDLER HASH HELP HISTOGRAM HOST HOSTS HOUR
+        HANDLER HASH HISTOGRAM HOST HOSTS HOUR
 
         ID IDC IDENTIFIED IGNORE_SERVER_IDS ILOG IMPORT INCR INDEXES INDEX_TABLE_ID INFO INITIAL_SIZE
         INNODB INSERT_METHOD INSTALL INSTANCE INVOKER IO IO_THREAD IPC ISOLATE ISOLATION ISSUER
@@ -432,6 +432,7 @@ END_P SET_VAR DELIMITER
 %type <node> opt_copy_id opt_backup_dest opt_preview opt_backup_backup_dest opt_tenant_info opt_with_active_piece
 %type <node> on_empty on_error json_on_response opt_returning_type opt_on_empty_or_error json_value_expr
 %type <node> ws_nweights opt_ws_as_char opt_ws_levels ws_level_flag_desc ws_level_flag_reverse ws_level_flags ws_level_list ws_level_list_item ws_level_number ws_level_range ws_level_list_or_range
+%type <node> help_stmt ident_or_text
 
 %start sql_stmt
 %%
@@ -493,6 +494,7 @@ stmt:
   | alter_outline_stmt      { $$ = $1; question_mark_issue($$, result); }
   | drop_outline_stmt       { $$ = $1; check_question_mark($$, result); }
   | show_stmt               { $$ = $1; check_question_mark($$, result); }
+  | help_stmt               { $$ = $1; check_question_mark($$, result); }
   | prepare_stmt            { $$ = $1; question_mark_issue($$, result); }
   | variable_set_stmt       { $$ = $1; question_mark_issue($$, result); }
   | execute_stmt            { $$ = $1; check_question_mark($$, result); }
@@ -9458,6 +9460,36 @@ TRADITIONAL
 { malloc_terminal_node($$, result->malloc_pool_, T_FORMAT_JSON); }
 ;
 
+/*****************************************************************************
+ *
+ *	help grammar 
+ *  TODO: Modify matching rules
+ *
+ * 
+ *****************************************************************************/
+help_stmt:
+HELP ident_or_text
+{
+  $$=$2;
+  $$->type_=T_HELP;
+}          
+;
+
+ident_or_text:
+  NAME_OB     { $$=$1;}
+| text_string { $$=$1;}
+/* | LEX_HOSTNAME { $$=$1;} */
+;
+
+
+/*
+ * execute_stmt:
+ * EXECUTE stmt_name opt_using_args
+ * {
+ *  malloc_non_terminal_node($$, result->malloc_pool_, T_EXECUTE, 2, $2, $3);
+ *}
+ *;
+ */
 
 /*****************************************************************************
  *
@@ -13897,7 +13929,6 @@ ACCOUNT
 |       GTS
 |       HANDLER
 |       HASH
-|       HELP
 |       HISTOGRAM
 |       HOST
 |       HOSTS
@@ -14443,6 +14474,7 @@ ACCESSIBLE
 | GRANT
 | GROUP
 | HAVING
+| HELP
 | HIGH_PRIORITY
 | HOUR_MICROSECOND
 | HOUR_MINUTE

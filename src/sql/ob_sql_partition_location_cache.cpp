@@ -336,6 +336,10 @@ ObSqlPartitionLocationCache::LocationDistributedMode ObSqlPartitionLocationCache
     case OB_USER_TID:
     case OB_DB_TID:
     case OB_PROC_TID:
+    case OB_HELP_CATEGORY_TID:
+    case OB_HELP_KEYWORD_TID:
+    case OB_HELP_TOPIC_TID:
+    case OB_HELP_RELATION_TID:
     case OB_PARAMETERS_TID:
     case OB_ALL_VIRTUAL_PROXY_SERVER_STAT_TID:
     case OB_ALL_VIRTUAL_PROXY_SYS_VARIABLE_TID:

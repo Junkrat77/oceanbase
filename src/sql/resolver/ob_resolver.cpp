@@ -80,6 +80,7 @@
 #include "sql/resolver/cmd/ob_resource_resolver.h"
 #include "sql/resolver/cmd/ob_variable_set_resolver.h"
 #include "sql/resolver/cmd/ob_show_resolver.h"
+#include "sql/resolver/cmd/ob_help_resolver.h"
 #include "sql/resolver/cmd/ob_alter_system_resolver.h"
 #include "sql/resolver/cmd/ob_kill_resolver.h"
 #include "sql/resolver/cmd/ob_set_transaction_resolver.h"
@@ -596,6 +597,10 @@ int ObResolver::resolve(IsPrepared if_prepared, const ParseNode& parse_tree, ObS
       case T_SHOW_QUERY_RESPONSE_TIME:
       case T_SHOW_STATUS: {
         REGISTER_STMT_RESOLVER(Show);
+        break;
+      }
+      case T_HELP: {
+        REGISTER_STMT_RESOLVER(Help);
         break;
       }
       case T_CREATE_USER: {

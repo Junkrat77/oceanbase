@@ -4862,6 +4862,76 @@ all_kv_ttl_task_history_def = dict(
 def_table_schema(**all_kv_ttl_task_def)
 def_table_schema(**all_kv_ttl_task_history_def)
 
+# help table add by ganquan.gq
+def_table_schema(
+    table_name    = '__all_help_category',
+    table_id      = '420',
+    table_type = 'SYSTEM_TABLE',
+    gm_columns = [],
+    rowkey_columns = [
+        ('help_category_id', 'int'),
+    ],
+    in_tenant_space = True,
+
+    normal_columns = [
+      ('name', 'varchar:64'),
+      ('parent_category_id', 'int'),
+      ('url', 'text')
+    ],
+    columns_with_tenant_id = [],
+)
+
+def_table_schema(
+    table_name    = '__all_help_keyword',
+    table_id      = '421',
+    table_type = 'SYSTEM_TABLE',
+    gm_columns = [],
+    rowkey_columns = [
+        ('help_keyword_id', 'int'),
+    ],
+    in_tenant_space = True,
+
+    normal_columns = [
+      ('name', 'varchar:64')
+    ],
+    columns_with_tenant_id = [],
+)
+
+def_table_schema(
+    table_name    = '__all_help_topic',
+    table_id      = '422',
+    table_type = 'SYSTEM_TABLE',
+    gm_columns = [],
+    rowkey_columns = [
+        ('help_topic_id', 'int'),
+    ],
+    in_tenant_space = True,
+
+    normal_columns = [
+      ('name', 'varchar:64'),
+      ('help_category_id', 'int'),
+      ('description', 'text'),
+      ('example', 'text'),
+      ('url', 'text')
+    ],
+    columns_with_tenant_id = [],
+)
+
+def_table_schema(
+    table_name    = '__all_help_relation',
+    table_id      = '423',
+    table_type = 'SYSTEM_TABLE',
+    gm_columns = [],
+    rowkey_columns = [
+        ('help_topic_id', 'int'),
+        ('help_keyword_id', 'int')
+    ],
+    in_tenant_space = True,
+
+    normal_columns = [],
+    columns_with_tenant_id = [],
+)
+
 # sys index schema def, only for compatible
 
 def_sys_index_table(
@@ -10244,6 +10314,77 @@ def_table_schema(**gen_iterate_virtual_table_def(
   real_tenant_id=True,
   table_name = '__all_virtual_kv_ttl_task_history',
   keywords = all_def_keywords['__all_kv_ttl_task_history']))
+
+
+def_table_schema(
+    database_id    = 'OB_MYSQL_SCHEMA_ID',
+    table_name    = 'help_category',
+    table_id      = '12328',
+    table_type = 'VIRTUAL_TABLE',
+    gm_columns = [],
+
+    in_tenant_space = True,
+    rowkey_columns = [
+        ('help_category_id', 'int'),
+    ],
+
+    normal_columns = [
+      ('name', 'varchar:64'),
+      ('parent_category_id', 'int'),
+      ('url', 'text')
+    ],
+    columns_with_tenant_id = [],
+)
+
+def_table_schema(
+    database_id    = 'OB_MYSQL_SCHEMA_ID',
+    table_name    = 'help_keyword',
+    table_id      = '12329',
+    table_type = 'VIRTUAL_TABLE',
+    gm_columns = [],
+    rowkey_columns = [
+        ('help_keyword_id', 'int'),
+    ],
+
+    normal_columns = [
+      ('name', 'varchar:64')
+    ],
+    columns_with_tenant_id = [],
+)
+
+def_table_schema(
+    database_id    = 'OB_MYSQL_SCHEMA_ID',
+    table_name    = 'help_topic',
+    table_id      = '12330',
+    table_type = 'VIRTUAL_TABLE',
+    gm_columns = [],
+    rowkey_columns = [
+        ('help_topic_id', 'int'),
+    ],
+    normal_columns = [
+      ('name', 'varchar:64'),
+      ('help_category_id', 'int'),
+      ('description', 'text'),
+      ('example', 'text'),
+      ('url', 'text')
+    ],
+    columns_with_tenant_id = [],
+)
+
+def_table_schema(
+    database_id    = 'OB_MYSQL_SCHEMA_ID',
+    table_name    = 'help_relation',
+    table_id      = '12331',
+    table_type = 'VIRTUAL_TABLE',
+    gm_columns = [],
+    rowkey_columns = [
+        ('help_topic_id', 'int'),
+        ('help_keyword_id', 'int')
+    ],
+
+    normal_columns = [],
+    columns_with_tenant_id = [],
+)
 
 ################################################################################
 # Oracle Virtual Table(15000,20000]

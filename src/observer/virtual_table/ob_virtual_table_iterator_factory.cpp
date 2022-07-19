@@ -41,6 +41,7 @@
 #include "observer/virtual_table/ob_mysql_user_table.h"
 #include "observer/virtual_table/ob_mysql_db_table.h"
 #include "observer/virtual_table/ob_mysql_proc_table.h"
+#include "observer/virtual_table/ob_mysql_help_category_table.h"
 #include "observer/virtual_table/ob_information_table_constraints_table.h"
 #include "observer/virtual_table/ob_information_referential_constraints_table.h"
 #include "observer/virtual_table/ob_information_partitions_table.h"
@@ -1420,6 +1421,14 @@ int ObVTIterCreator::create_vt_iter(ObVTableScanParam& params, ObVirtualTableIte
             }
             break;
           }
+          // case OB_HELP_CATEGORY_TID: {
+          //   ObMySQLHelpCategoryTable* mysql_help_category_table = NULL;
+          //   if (OB_SUCC(NEW_VIRTUAL_TABLE(ObMySQLHelpCategoryTable, mysql_help_category_table))) {
+          //     mysql_help_category_table->set_tenant_id(real_tenant_id);
+          //     vt_iter = static_cast<ObVirtualTableIterator*>(mysql_help_category_table);
+          //   }
+          //   break;
+          // }
           case OB_PARAMETERS_TID: {
             ObInformationParametersTable* information_parameters_table = NULL;
             if (OB_SUCC(NEW_VIRTUAL_TABLE(ObInformationParametersTable, information_parameters_table))) {
