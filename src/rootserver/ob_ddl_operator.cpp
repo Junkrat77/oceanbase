@@ -56,6 +56,7 @@
 #include "observer/omt/ob_tenant_config_mgr.h"
 #include "share/schema/ob_error_info.h"
 #include "rootserver/ob_root_service.h"
+#include "rootserver/ob_fill_help_table.h"
 
 namespace oceanbase {
 
@@ -6236,6 +6237,8 @@ int ObDDLOperator::init_tenant_env(
     LOG_WARN("insert tenant config failed", K(tenant_id), K(ret));
   } else if (OB_FAIL(init_tenant_cgroup(tenant_id, trans))) {
     LOG_WARN("insert tenant groups failed", K(tenant_id), K(ret));
+  } else if (OB_FAIL(init_help_tables(tenant_id, trans))) {
+    LOG_WARN("insert help tables failed", K(tenant_id), K(ret));
   } else if (OB_SYS_TENANT_ID == tenant_id) {
     if (OB_FAIL(init_sys_tenant_charset(trans))) {
       LOG_WARN("insert charset failed", K(tenant_id), K(ret));
@@ -6246,7 +6249,26 @@ int ObDDLOperator::init_tenant_env(
     }
     // TODO [profile]
   }
+  return ret;
+}
 
+int ObDDLOperator::init_help_tables(const uint64_t tenant_id, ObMySQLTransaction& trans) {
+  int ret = OB_SUCCESS;
+  ObSqlString sql;
+  int64_t affected_rows = 0;
+  for(const char** iter = &fill_help_tables_cmd[0]; *iter != NULL; iter++) {
+    LOG_INFO("[gq]: init help table sql", K(*iter));
+    if (OB_FAIL(sql.assign(*iter))) {
+      LOG_WARN("assign sql failed", K(ret));
+    } if (OB_FAIL(trans.write(tenant_id, sql.ptr(), affected_rows))) {
+      LOG_WARN("execute sql failed", K(ret), K(sql));
+    } else if (!(is_single_row(affected_rows) || is_zero_row(affected_rows))) {
+      ret = OB_ERR_UNEXPECTED;
+      LOG_WARN("unexpected affected rows", K(ret), K(affected_rows));
+    } else {
+      LOG_TRACE("execute sql success", K(sql));
+    }
+  }
   return ret;
 }
 

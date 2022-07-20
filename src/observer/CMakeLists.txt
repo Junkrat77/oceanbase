@@ -194,7 +194,6 @@ ob_set_subtarget(ob_server vt
   virtual_table/ob_mysql_db_table.cpp
   virtual_table/ob_mysql_proc_table.cpp
   virtual_table/ob_mysql_user_table.cpp
-  virtual_table/ob_mysql_help_category_table.cpp
   virtual_table/ob_partition_sstable_image_info_table.cpp
   virtual_table/ob_plan_cache_plan_explain.cpp
   virtual_table/ob_session_variables.cpp

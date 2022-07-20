@@ -774,10 +774,6 @@ public:
   static int all_virtual_query_response_time_schema(share::schema::ObTableSchema &table_schema);
   static int all_virtual_kv_ttl_task_schema(share::schema::ObTableSchema &table_schema);
   static int all_virtual_kv_ttl_task_history_schema(share::schema::ObTableSchema &table_schema);
-  static int help_category_schema(share::schema::ObTableSchema &table_schema);
-  static int help_keyword_schema(share::schema::ObTableSchema &table_schema);
-  static int help_topic_schema(share::schema::ObTableSchema &table_schema);
-  static int help_relation_schema(share::schema::ObTableSchema &table_schema);
   static int all_virtual_table_agent_schema(share::schema::ObTableSchema &table_schema);
   static int all_virtual_column_agent_schema(share::schema::ObTableSchema &table_schema);
   static int all_virtual_database_agent_schema(share::schema::ObTableSchema &table_schema);
@@ -1824,10 +1820,6 @@ const schema_create_func virtual_table_schema_creators [] = {
   ObInnerTableSchema::all_virtual_query_response_time_schema,
   ObInnerTableSchema::all_virtual_kv_ttl_task_schema,
   ObInnerTableSchema::all_virtual_kv_ttl_task_history_schema,
-  ObInnerTableSchema::help_category_schema,
-  ObInnerTableSchema::help_keyword_schema,
-  ObInnerTableSchema::help_topic_schema,
-  ObInnerTableSchema::help_relation_schema,
   ObInnerTableSchema::all_virtual_table_agent_schema,
   ObInnerTableSchema::all_virtual_column_agent_schema,
   ObInnerTableSchema::all_virtual_database_agent_schema,
@@ -2568,7 +2560,6 @@ const uint64_t tenant_space_tables [] = {
   OB_ALL_VIRTUAL_FILES_TID,
   OB_FILES_TID,
   OB_TENANT_VIRTUAL_OBJECT_DEFINITION_TID,
-  OB_HELP_CATEGORY_TID,
   OB_ALL_VIRTUAL_TABLE_AGENT_TID,
   OB_ALL_VIRTUAL_COLUMN_AGENT_TID,
   OB_ALL_VIRTUAL_DATABASE_AGENT_TID,
@@ -3436,7 +3427,6 @@ const char* const tenant_space_table_names [] = {
   OB_ALL_VIRTUAL_FILES_TNAME,
   OB_FILES_TNAME,
   OB_TENANT_VIRTUAL_OBJECT_DEFINITION_TNAME,
-  OB_HELP_CATEGORY_TNAME,
   OB_ALL_VIRTUAL_TABLE_AGENT_TNAME,
   OB_ALL_VIRTUAL_COLUMN_AGENT_TNAME,
   OB_ALL_VIRTUAL_DATABASE_AGENT_TNAME,
@@ -4110,11 +4100,11 @@ static inline bool is_only_rs_virtual_table(const uint64_t tid)
 
 const int64_t OB_CORE_TABLE_COUNT = 5;
 const int64_t OB_SYS_TABLE_COUNT = 193;
-const int64_t OB_VIRTUAL_TABLE_COUNT = 470;
+const int64_t OB_VIRTUAL_TABLE_COUNT = 466;
 const int64_t OB_SYS_VIEW_COUNT = 365;
-const int64_t OB_SYS_TENANT_TABLE_COUNT = 1034;
+const int64_t OB_SYS_TENANT_TABLE_COUNT = 1030;
 const int64_t OB_CORE_SCHEMA_VERSION = 1;
-const int64_t OB_BOOTSTRAP_SCHEMA_VERSION = 1037;
+const int64_t OB_BOOTSTRAP_SCHEMA_VERSION = 1033;
 
 } // end namespace share
 } // end namespace oceanbase

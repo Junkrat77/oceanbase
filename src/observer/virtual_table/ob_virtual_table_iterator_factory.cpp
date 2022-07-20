@@ -41,7 +41,6 @@
 #include "observer/virtual_table/ob_mysql_user_table.h"
 #include "observer/virtual_table/ob_mysql_db_table.h"
 #include "observer/virtual_table/ob_mysql_proc_table.h"
-#include "observer/virtual_table/ob_mysql_help_category_table.h"
 #include "observer/virtual_table/ob_information_table_constraints_table.h"
 #include "observer/virtual_table/ob_information_referential_constraints_table.h"
 #include "observer/virtual_table/ob_information_partitions_table.h"
