@@ -2554,6 +2554,8 @@ static int number_year(
     } else if (in.get_number().is_negative()) {
       uint8_t value = 0;
       if (CAST_FAIL(ObTimeConverter::int_to_year(INT_MIN, value))) {
+      } else {
+        SET_RES_YEAR(out);
       }
     } else {
       ObObj from;
@@ -4082,7 +4084,9 @@ static int string_number(
       }
     }
     if (CAST_FAIL(ret)) {
+      LOG_WARN("string_number failed", K(ret), K(in), K(expect_type), K(cast_mode));
     } else if (ObUNumberType == expect_type && CAST_FAIL(numeric_negative_check(value))) {
+      LOG_WARN("numeric_negative_check failed", K(ret), K(in), K(cast_mode));
     } else {
       out.set_number(expect_type, value);
     }

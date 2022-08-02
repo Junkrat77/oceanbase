@@ -419,6 +419,8 @@ public:
       const common::ObRegion& region, bool& readonly_at_all) const;
   int check_has_all_server_readonly_replica(share::schema::ObSchemaGetterGuard& guard, bool& has) const;
   int check_is_all_server_readonly_replica(share::schema::ObSchemaGetterGuard& guard, bool& is) const;
+  virtual int check_has_own_not_f_replica(bool &has_not_f_replica) const override;
+
   void reset_locality_options();
 
   void reset_primary_zone_options();
@@ -562,6 +564,10 @@ public:
   inline bool is_tmp_table() const
   {
     return TMP_TABLE == table_type_ || TMP_TABLE_ORA_SESS == table_type_ || TMP_TABLE_ORA_TRX == table_type_;
+  }
+  inline bool is_ctas_tmp_table() const
+  {
+    return 0 != session_id_ && !is_tmp_table();
   }
   inline bool is_mysql_tmp_table() const
   {

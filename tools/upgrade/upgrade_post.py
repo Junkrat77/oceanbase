@@ -8130,6 +8130,11 @@
 #  if (len(results) != 0) :
 #    raise MyError("Duplicate index name exist in mysql tenant")
 #
+## 31. check the _max_trx_size
+#def check_max_trx_size_config(query_cur, cur):
+#  set_parameter(cur, '_max_trx_size', '100G')
+#  logging.info('set _max_trx_size to default value 100G')
+#
 ## 开始升级前的检查
 #def do_check(my_host, my_port, my_user, my_passwd, upgrade_params):
 #  try:
@@ -8164,6 +8169,7 @@
 #      check_sys_table_leader(query_cur)
 #      check_and_modify_px_query(query_cur, cur)
 #      check_duplicate_index_name_in_mysql(query_cur, cur)
+#      check_max_trx_size_config(query_cur, cur)
 #    except Exception, e:
 #      logging.exception('run error')
 #      raise e

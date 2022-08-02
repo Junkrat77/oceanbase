@@ -1016,6 +1016,10 @@ DEF_BOOL(enable_election_group, OB_CLUSTER_PARAMETER, "True",
     "specifies whether election group is turned on. "
     "Value:  True:turned on;  False: turned off",
     ObParameterAttr(Section::OBSERVER, Source::DEFAULT, EditLevel::DYNAMIC_EFFECTIVE));
+DEF_BOOL(_enable_trans_ctx_size_limit, OB_TENANT_PARAMETER, "True",
+    "specifies whether trans ctx size limit is turned on or not. "
+    "Value: True:turned on;  False: turned off",
+    ObParameterAttr(Section::TENANT, Source::DEFAULT, EditLevel::DYNAMIC_EFFECTIVE));
 
 // Tablet config
 DEF_CAP_WITH_CHECKER(tablet_size, OB_CLUSTER_PARAMETER, "128M", common::ObConfigTabletSizeChecker,
@@ -1327,7 +1331,7 @@ DEF_STR(backup_dest_option, OB_CLUSTER_PARAMETER, "", "backup_dest_option",
 DEF_STR(backup_backup_dest_option, OB_CLUSTER_PARAMETER, "", "backup_backup_dest_option",
     ObParameterAttr(Section::OBSERVER, Source::DEFAULT, EditLevel::DYNAMIC_EFFECTIVE));
 
-DEF_LOG_ARCHIVE_OPTIONS_WITH_CHECKER(backup_log_archive_option, OB_CLUSTER_PARAMETER, "OPTIONAL",
+DEF_LOG_ARCHIVE_OPTIONS_WITH_CHECKER(backup_log_archive_option, OB_CLUSTER_PARAMETER, "OPTIONAL COMPRESSION=ENABLE",
     common::ObConfigLogArchiveOptionsChecker, "backup log archive option, support MANDATORY/OPTIONAL, COMPRESSION",
     ObParameterAttr(Section::OBSERVER, Source::DEFAULT, EditLevel::DYNAMIC_EFFECTIVE));
 
