@@ -527,7 +527,6 @@ private:
   virtual int init_tenant_sys_stats(const uint64_t tenant_id, common::ObMySQLTransaction& trans);
   virtual int init_tenant_config(const uint64_t tenant_id, common::ObMySQLTransaction& trans);
   virtual int init_tenant_cgroup(const uint64_t tenant_id, common::ObMySQLTransaction& trans);
-  virtual int init_help_tables(const uint64_t tenant_id, common::ObMySQLTransaction& trans);
   virtual int init_sys_tenant_charset(common::ObMySQLTransaction& trans);
   virtual int init_sys_tenant_collation(common::ObMySQLTransaction& trans);
   virtual int init_sys_tenant_privilege(common::ObMySQLTransaction& trans);

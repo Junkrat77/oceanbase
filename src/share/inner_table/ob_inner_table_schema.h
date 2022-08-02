@@ -489,10 +489,10 @@ public:
   static int all_backup_backup_log_archive_status_v2_schema(share::schema::ObTableSchema &table_schema);
   static int all_kv_ttl_task_schema(share::schema::ObTableSchema &table_schema);
   static int all_kv_ttl_task_history_schema(share::schema::ObTableSchema &table_schema);
-  static int all_help_category_schema(share::schema::ObTableSchema &table_schema);
-  static int all_help_keyword_schema(share::schema::ObTableSchema &table_schema);
-  static int all_help_topic_schema(share::schema::ObTableSchema &table_schema);
-  static int all_help_relation_schema(share::schema::ObTableSchema &table_schema);
+  static int help_category_schema(share::schema::ObTableSchema &table_schema);
+  static int help_keyword_schema(share::schema::ObTableSchema &table_schema);
+  static int help_topic_schema(share::schema::ObTableSchema &table_schema);
+  static int help_relation_schema(share::schema::ObTableSchema &table_schema);
   static int tenant_virtual_all_table_schema(share::schema::ObTableSchema &table_schema);
   static int tenant_virtual_table_column_schema(share::schema::ObTableSchema &table_schema);
   static int tenant_virtual_table_index_schema(share::schema::ObTableSchema &table_schema);
@@ -1532,10 +1532,10 @@ const schema_create_func sys_table_schema_creators [] = {
   ObInnerTableSchema::all_backup_backup_log_archive_status_v2_schema,
   ObInnerTableSchema::all_kv_ttl_task_schema,
   ObInnerTableSchema::all_kv_ttl_task_history_schema,
-  ObInnerTableSchema::all_help_category_schema,
-  ObInnerTableSchema::all_help_keyword_schema,
-  ObInnerTableSchema::all_help_topic_schema,
-  ObInnerTableSchema::all_help_relation_schema,
+  ObInnerTableSchema::help_category_schema,
+  ObInnerTableSchema::help_keyword_schema,
+  ObInnerTableSchema::help_topic_schema,
+  ObInnerTableSchema::help_relation_schema,
   NULL,};
 
 const schema_create_func virtual_table_schema_creators [] = {
@@ -2504,10 +2504,10 @@ const uint64_t tenant_space_tables [] = {
   OB_ALL_RES_MGR_CONSUMER_GROUP_TID,
   OB_ALL_KV_TTL_TASK_TID,
   OB_ALL_KV_TTL_TASK_HISTORY_TID,
-  OB_ALL_HELP_CATEGORY_TID,
-  OB_ALL_HELP_KEYWORD_TID,
-  OB_ALL_HELP_TOPIC_TID,
-  OB_ALL_HELP_RELATION_TID,
+  OB_HELP_CATEGORY_TID,
+  OB_HELP_KEYWORD_TID,
+  OB_HELP_TOPIC_TID,
+  OB_HELP_RELATION_TID,
   OB_ALL_TABLE_V2_HISTORY_IDX_DATA_TABLE_ID_TID,
   OB_ALL_TABLE_HISTORY_IDX_DATA_TABLE_ID_TID,
   OB_TENANT_VIRTUAL_ALL_TABLE_TID,
@@ -3371,10 +3371,10 @@ const char* const tenant_space_table_names [] = {
   OB_ALL_RES_MGR_CONSUMER_GROUP_TNAME,
   OB_ALL_KV_TTL_TASK_TNAME,
   OB_ALL_KV_TTL_TASK_HISTORY_TNAME,
-  OB_ALL_HELP_CATEGORY_TNAME,
-  OB_ALL_HELP_KEYWORD_TNAME,
-  OB_ALL_HELP_TOPIC_TNAME,
-  OB_ALL_HELP_RELATION_TNAME,
+  OB_HELP_CATEGORY_TNAME,
+  OB_HELP_KEYWORD_TNAME,
+  OB_HELP_TOPIC_TNAME,
+  OB_HELP_RELATION_TNAME,
   OB_ALL_TABLE_V2_HISTORY_IDX_DATA_TABLE_ID_TNAME,
   OB_ALL_TABLE_HISTORY_IDX_DATA_TABLE_ID_TNAME,
   OB_TENANT_VIRTUAL_ALL_TABLE_TNAME,

@@ -598,7 +598,7 @@ int ObInnerTableSchema::all_kv_ttl_task_history_schema(ObTableSchema &table_sche
   return ret;
 }
 
-int ObInnerTableSchema::all_help_category_schema(ObTableSchema &table_schema)
+int ObInnerTableSchema::help_category_schema(ObTableSchema &table_schema)
 {
   int ret = OB_SUCCESS;
   uint64_t column_id = OB_APP_MIN_COLUMN_ID - 1;
@@ -606,8 +606,8 @@ int ObInnerTableSchema::all_help_category_schema(ObTableSchema &table_schema)
   //generated fields:
   table_schema.set_tenant_id(OB_SYS_TENANT_ID);
   table_schema.set_tablegroup_id(combine_id(OB_SYS_TENANT_ID, OB_SYS_TABLEGROUP_ID));
-  table_schema.set_database_id(combine_id(OB_SYS_TENANT_ID, OB_SYS_DATABASE_ID));
-  table_schema.set_table_id(combine_id(OB_SYS_TENANT_ID, OB_ALL_HELP_CATEGORY_TID));
+  table_schema.set_database_id(combine_id(OB_SYS_TENANT_ID, OB_MYSQL_SCHEMA_ID));
+  table_schema.set_table_id(combine_id(OB_SYS_TENANT_ID, OB_HELP_CATEGORY_TID));
   table_schema.set_rowkey_split_pos(0);
   table_schema.set_is_use_bloomfilter(false);
   table_schema.set_progressive_merge_num(0);
@@ -618,7 +618,7 @@ int ObInnerTableSchema::all_help_category_schema(ObTableSchema &table_schema)
   table_schema.set_def_type(TABLE_DEF_TYPE_INTERNAL);
 
   if (OB_SUCC(ret)) {
-    if (OB_FAIL(table_schema.set_table_name(OB_ALL_HELP_CATEGORY_TNAME))) {
+    if (OB_FAIL(table_schema.set_table_name(OB_HELP_CATEGORY_TNAME))) {
       LOG_ERROR("fail to set table_name", K(ret));
     }
   }
@@ -704,7 +704,7 @@ int ObInnerTableSchema::all_help_category_schema(ObTableSchema &table_schema)
   return ret;
 }
 
-int ObInnerTableSchema::all_help_keyword_schema(ObTableSchema &table_schema)
+int ObInnerTableSchema::help_keyword_schema(ObTableSchema &table_schema)
 {
   int ret = OB_SUCCESS;
   uint64_t column_id = OB_APP_MIN_COLUMN_ID - 1;
@@ -712,8 +712,8 @@ int ObInnerTableSchema::all_help_keyword_schema(ObTableSchema &table_schema)
   //generated fields:
   table_schema.set_tenant_id(OB_SYS_TENANT_ID);
   table_schema.set_tablegroup_id(combine_id(OB_SYS_TENANT_ID, OB_SYS_TABLEGROUP_ID));
-  table_schema.set_database_id(combine_id(OB_SYS_TENANT_ID, OB_SYS_DATABASE_ID));
-  table_schema.set_table_id(combine_id(OB_SYS_TENANT_ID, OB_ALL_HELP_KEYWORD_TID));
+  table_schema.set_database_id(combine_id(OB_SYS_TENANT_ID, OB_MYSQL_SCHEMA_ID));
+  table_schema.set_table_id(combine_id(OB_SYS_TENANT_ID, OB_HELP_KEYWORD_TID));
   table_schema.set_rowkey_split_pos(0);
   table_schema.set_is_use_bloomfilter(false);
   table_schema.set_progressive_merge_num(0);
@@ -724,7 +724,7 @@ int ObInnerTableSchema::all_help_keyword_schema(ObTableSchema &table_schema)
   table_schema.set_def_type(TABLE_DEF_TYPE_INTERNAL);
 
   if (OB_SUCC(ret)) {
-    if (OB_FAIL(table_schema.set_table_name(OB_ALL_HELP_KEYWORD_TNAME))) {
+    if (OB_FAIL(table_schema.set_table_name(OB_HELP_KEYWORD_TNAME))) {
       LOG_ERROR("fail to set table_name", K(ret));
     }
   }
@@ -780,7 +780,7 @@ int ObInnerTableSchema::all_help_keyword_schema(ObTableSchema &table_schema)
   return ret;
 }
 
-int ObInnerTableSchema::all_help_topic_schema(ObTableSchema &table_schema)
+int ObInnerTableSchema::help_topic_schema(ObTableSchema &table_schema)
 {
   int ret = OB_SUCCESS;
   uint64_t column_id = OB_APP_MIN_COLUMN_ID - 1;
@@ -788,8 +788,8 @@ int ObInnerTableSchema::all_help_topic_schema(ObTableSchema &table_schema)
   //generated fields:
   table_schema.set_tenant_id(OB_SYS_TENANT_ID);
   table_schema.set_tablegroup_id(combine_id(OB_SYS_TENANT_ID, OB_SYS_TABLEGROUP_ID));
-  table_schema.set_database_id(combine_id(OB_SYS_TENANT_ID, OB_SYS_DATABASE_ID));
-  table_schema.set_table_id(combine_id(OB_SYS_TENANT_ID, OB_ALL_HELP_TOPIC_TID));
+  table_schema.set_database_id(combine_id(OB_SYS_TENANT_ID, OB_MYSQL_SCHEMA_ID));
+  table_schema.set_table_id(combine_id(OB_SYS_TENANT_ID, OB_HELP_TOPIC_TID));
   table_schema.set_rowkey_split_pos(0);
   table_schema.set_is_use_bloomfilter(false);
   table_schema.set_progressive_merge_num(0);
@@ -800,7 +800,7 @@ int ObInnerTableSchema::all_help_topic_schema(ObTableSchema &table_schema)
   table_schema.set_def_type(TABLE_DEF_TYPE_INTERNAL);
 
   if (OB_SUCC(ret)) {
-    if (OB_FAIL(table_schema.set_table_name(OB_ALL_HELP_TOPIC_TNAME))) {
+    if (OB_FAIL(table_schema.set_table_name(OB_HELP_TOPIC_TNAME))) {
       LOG_ERROR("fail to set table_name", K(ret));
     }
   }
@@ -916,7 +916,7 @@ int ObInnerTableSchema::all_help_topic_schema(ObTableSchema &table_schema)
   return ret;
 }
 
-int ObInnerTableSchema::all_help_relation_schema(ObTableSchema &table_schema)
+int ObInnerTableSchema::help_relation_schema(ObTableSchema &table_schema)
 {
   int ret = OB_SUCCESS;
   uint64_t column_id = OB_APP_MIN_COLUMN_ID - 1;
@@ -924,8 +924,8 @@ int ObInnerTableSchema::all_help_relation_schema(ObTableSchema &table_schema)
   //generated fields:
   table_schema.set_tenant_id(OB_SYS_TENANT_ID);
   table_schema.set_tablegroup_id(combine_id(OB_SYS_TENANT_ID, OB_SYS_TABLEGROUP_ID));
-  table_schema.set_database_id(combine_id(OB_SYS_TENANT_ID, OB_SYS_DATABASE_ID));
-  table_schema.set_table_id(combine_id(OB_SYS_TENANT_ID, OB_ALL_HELP_RELATION_TID));
+  table_schema.set_database_id(combine_id(OB_SYS_TENANT_ID, OB_MYSQL_SCHEMA_ID));
+  table_schema.set_table_id(combine_id(OB_SYS_TENANT_ID, OB_HELP_RELATION_TID));
   table_schema.set_rowkey_split_pos(0);
   table_schema.set_is_use_bloomfilter(false);
   table_schema.set_progressive_merge_num(0);
@@ -936,7 +936,7 @@ int ObInnerTableSchema::all_help_relation_schema(ObTableSchema &table_schema)
   table_schema.set_def_type(TABLE_DEF_TYPE_INTERNAL);
 
   if (OB_SUCC(ret)) {
-    if (OB_FAIL(table_schema.set_table_name(OB_ALL_HELP_RELATION_TNAME))) {
+    if (OB_FAIL(table_schema.set_table_name(OB_HELP_RELATION_TNAME))) {
       LOG_ERROR("fail to set table_name", K(ret));
     }
   }

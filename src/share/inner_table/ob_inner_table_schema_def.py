@@ -4864,72 +4864,76 @@ def_table_schema(**all_kv_ttl_task_history_def)
 
 # help table add by ganquan.gq
 def_table_schema(
-    table_name    = '__all_help_category',
-    table_id      = '420',
-    table_type = 'SYSTEM_TABLE',
-    gm_columns = [],
-    rowkey_columns = [
-        ('help_category_id', 'int'),
-    ],
-    in_tenant_space = True,
-
-    normal_columns = [
-      ('name', 'varchar:64'),
-      ('parent_category_id', 'int'),
-      ('url', 'text')
-    ],
-    columns_with_tenant_id = [],
-)
-
-def_table_schema(
-    table_name    = '__all_help_keyword',
-    table_id      = '421',
-    table_type = 'SYSTEM_TABLE',
-    gm_columns = [],
-    rowkey_columns = [
-        ('help_keyword_id', 'int'),
-    ],
-    in_tenant_space = True,
-
-    normal_columns = [
-      ('name', 'varchar:64')
-    ],
-    columns_with_tenant_id = [],
-)
-
-def_table_schema(
-    table_name    = '__all_help_topic',
-    table_id      = '422',
-    table_type = 'SYSTEM_TABLE',
-    gm_columns = [],
-    rowkey_columns = [
-        ('help_topic_id', 'int'),
-    ],
-    in_tenant_space = True,
-
-    normal_columns = [
-      ('name', 'varchar:64'),
+  database_id    = 'OB_MYSQL_SCHEMA_ID',
+  table_name    = 'help_category',
+  table_id      = '420',
+  table_type = 'SYSTEM_TABLE',
+  gm_columns = [],
+  rowkey_columns = [
       ('help_category_id', 'int'),
-      ('description', 'text'),
-      ('example', 'text'),
-      ('url', 'text')
-    ],
-    columns_with_tenant_id = [],
+  ],
+  in_tenant_space = True,
+
+  normal_columns = [
+    ('name', 'varchar:64'),
+    ('parent_category_id', 'int'),
+    ('url', 'text')
+  ],
+  columns_with_tenant_id = [],
 )
 
 def_table_schema(
-    table_name    = '__all_help_relation',
-    table_id      = '423',
-    table_type = 'SYSTEM_TABLE',
-    gm_columns = [],
-    rowkey_columns = [
-        ('help_topic_id', 'int'),
-        ('help_keyword_id', 'int')
-    ],
-    in_tenant_space = True,
+  database_id    = 'OB_MYSQL_SCHEMA_ID',
+  table_name    = 'help_keyword',
+  table_id      = '421',
+  table_type = 'SYSTEM_TABLE',
+  gm_columns = [],
+  rowkey_columns = [
+      ('help_keyword_id', 'int'),
+  ],
+  in_tenant_space = True,
 
-    normal_columns = [],
-    columns_with_tenant_id = [],
+  normal_columns = [
+    ('name', 'varchar:64')
+  ],
+  columns_with_tenant_id = [],
+)
+
+def_table_schema(
+  database_id    = 'OB_MYSQL_SCHEMA_ID',
+  table_name    = 'help_topic',
+  table_id      = '422',
+  table_type = 'SYSTEM_TABLE',
+  gm_columns = [],
+  rowkey_columns = [
+      ('help_topic_id', 'int'),
+  ],
+  in_tenant_space = True,
+
+  normal_columns = [
+    ('name', 'varchar:64'),
+    ('help_category_id', 'int'),
+    ('description', 'text'),
+    ('example', 'text'),
+    ('url', 'text')
+  ],
+  columns_with_tenant_id = [],
+)
+
+def_table_schema(
+  database_id    = 'OB_MYSQL_SCHEMA_ID',
+  table_name    = 'help_relation',
+  table_id      = '423',
+  table_type = 'SYSTEM_TABLE',
+  gm_columns = [],
+  rowkey_columns = [
+      ('help_topic_id', 'int'),
+      ('help_keyword_id', 'int')
+  ],
+  in_tenant_space = True,
+
+  normal_columns = [],
+  columns_with_tenant_id = [],
 )
 
 # sys index schema def, only for compatible

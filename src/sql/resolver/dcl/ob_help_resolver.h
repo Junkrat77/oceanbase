@@ -7,7 +7,7 @@
  * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
  * EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
  * MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
- * See the Mulan PubL v2 for more details.src/sql/resolver/cmd/ob_help_resolver.h
+ * See the Mulan PubL v2 for more details.src/sql/resolver/dcl/ob_help_resolver.h
  */
 
 #ifndef OCEANBASE_SQL_RESOLVER_CMD_OB_HELP_RESOLVER_
@@ -24,25 +24,11 @@ public:
   virtual int resolve(const ParseNode& parse_tree);
   int parse_and_resolve_select_sql(const ObString& select_sql);
 private:
-  class ObSqlStrGenerator;
-  
+  ObSqlString sql;
+  int search_topic(const ParseNode& parse_tree, int64_t &topic_count, ObString &select_sql);
+  int search_keyword(const ParseNode& parse_tree, int64_t &topic_count, ObString &select_sql);
+  int search_category(const ParseNode& parse_tree, int64_t &category_count, ObString &select_sql);
 };  // ObHelpresolver
-class ObHelpResolver::ObSqlStrGenerator {
-public:
-  ObSqlStrGenerator() : sql_buf_(NULL), sql_buf_pos_(0)
-  {}
-  virtual ~ObSqlStrGenerator()
-  {}
-  int init(common::ObIAllocator* alloc);
-  virtual int gen_select_str(const char* select_str, ...);
-  virtual int gen_limit_str(int64_t offset, int64_t row_cnt);
-  void assign_sql_str(common::ObString& sql_str);
-
-private:
-  char* sql_buf_;
-  int64_t sql_buf_pos_;
-  DISALLOW_COPY_AND_ASSIGN(ObSqlStrGenerator);
-};  // ObSqlstrgenerator
 }   // namespace sql
 }  	// namespace oceanbase
 #endif /* OCEANBASE_SQL_RESOLVER_CMD_OB_SHOW_RESOLVER_ */

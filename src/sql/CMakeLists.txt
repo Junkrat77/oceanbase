@@ -875,7 +875,6 @@ ob_set_subtarget(ob_sql resolver
   resolver/cmd/ob_resource_resolver.cpp
   resolver/cmd/ob_set_transaction_resolver.cpp
   resolver/cmd/ob_show_resolver.cpp
-  resolver/cmd/ob_help_resolver.cpp
   resolver/cmd/ob_variable_set_resolver.cpp
   resolver/cmd/ob_variable_set_stmt.cpp
   resolver/dcl/ob_alter_user_profile_resolver.cpp
@@ -888,6 +887,7 @@ ob_set_subtarget(ob_sql resolver
   resolver/dcl/ob_drop_user_resolver.cpp
   resolver/dcl/ob_drop_user_stmt.cpp
   resolver/dcl/ob_grant_resolver.cpp
+  resolver/dcl/ob_help_resolver.cpp
   resolver/dcl/ob_grant_stmt.cpp
   resolver/dcl/ob_lock_user_resolver.cpp
   resolver/dcl/ob_lock_user_stmt.cpp
