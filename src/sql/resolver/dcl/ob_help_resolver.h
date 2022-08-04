@@ -10,8 +10,8 @@
  * See the Mulan PubL v2 for more details.src/sql/resolver/dcl/ob_help_resolver.h
  */
 
-#ifndef OCEANBASE_SQL_RESOLVER_CMD_OB_HELP_RESOLVER_
-#define OCEANBASE_SQL_RESOLVER_CMD_OB_HELP_RESOLVER_
+#ifndef OCEANBASE_SQL_RESOLVER_DML_OB_HELP_RESOLVER_
+#define OCEANBASE_SQL_RESOLVER_DML_OB_HELP_RESOLVER_
 #include "sql/resolver/dml/ob_select_resolver.h"
 namespace oceanbase {
 namespace sql {
@@ -31,4 +31,4 @@ private:
 };  // ObHelpresolver
 }   // namespace sql
 }  	// namespace oceanbase
-#endif /* OCEANBASE_SQL_RESOLVER_CMD_OB_SHOW_RESOLVER_ */
+#endif /* OCEANBASE_SQL_RESOLVER_DML_OB_HELP_RESOLVER_ */

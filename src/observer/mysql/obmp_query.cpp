@@ -429,7 +429,6 @@ int ObMPQuery::process_single_stmt(const ObMultiStmtItem& multi_stmt_item, ObSQL
         CREATE_WITH_TEMP_CONTEXT(param)
         {
           ret = do_process(session, has_more_result, force_sync_resp, async_resp_used, need_disconnect);
-          // LOG_TRACE("sql result: ", K(*(session->result)));
           ctx_.clear();
         }
         // set session retry state
@@ -661,7 +660,6 @@ OB_INLINE int ObMPQuery::do_process(
         result->set_wildcard_string(wild_str_);
       }
 
-      LOG_INFO("stat query result: ", K(*result));
       // response_result
       if (OB_FAIL(ret)) {
       } else if (OB_FAIL(fill_feedback_session_info(*result, session))) {
@@ -1074,7 +1072,6 @@ OB_INLINE int ObMPQuery::response_result(ObQueryExecCtx& query_ctx, bool force_s
 {
   int ret = OB_SUCCESS;
   ObMySQLResultSet& result = query_ctx.get_result_set();
-  LOG_TRACE("[gq] responese result in response_result: ", K(result));
   ObSQLSessionInfo& session = result.get_session();
   CHECK_COMPATIBILITY_MODE(&session);
 
@@ -1083,7 +1080,6 @@ OB_INLINE int ObMPQuery::response_result(ObQueryExecCtx& query_ctx, bool force_s
   NG_TRACE_EXT(exec_begin, OB_ID(arg1), force_sync_resp, OB_ID(end_trans_cb), need_trans_cb);
   // plan is NULL for cmd
   if (OB_LIKELY(NULL != result.get_physical_plan())) {
-    LOG_TRACE("[gq] responese result in response_result ");
     if (need_execute_async && GET_MIN_CLUSTER_VERSION() >= CLUSTER_VERSION_2260) {
       ctx_.is_execute_async_ = true;
       WITH_CONTEXT(query_ctx.get_mem_context())
@@ -1115,7 +1111,7 @@ OB_INLINE int ObMPQuery::response_result(ObQueryExecCtx& query_ctx, bool force_s
       }
       async_resp_used = result.is_async_end_trans_submitted();
     } else {
-      ObSyncPlanDriver drv(gctx_, ctx_, session, retry_ctrl_, *this); /* query response */
+      ObSyncPlanDriver drv(gctx_, ctx_, session, retry_ctrl_, *this);
       ret = drv.response_result(result);
     }
   } else {
@@ -1129,7 +1125,6 @@ OB_INLINE int ObMPQuery::response_result(ObQueryExecCtx& query_ctx, bool force_s
       }
       async_resp_used = result.is_async_end_trans_submitted();
     } else {
-      LOG_TRACE("[gq] responese result in response_result ");
       ObSyncCmdDriver drv(gctx_, ctx_, session, retry_ctrl_, *this);
       ret = drv.response_result(result);
     }

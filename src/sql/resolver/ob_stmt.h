@@ -402,7 +402,6 @@ public:
         || (stmt_type == stmt::T_VARIABLE_SET && !has_global_variable));
   }
 
-// ?? 要不要加对help的判断?
   static bool is_dcl_stmt(stmt::StmtType stmt_type)
   {
     return (stmt_type >= stmt::T_CREATE_USER && stmt_type <= stmt::T_REVOKE)

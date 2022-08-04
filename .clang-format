@@ -7,7 +7,7 @@ AlignAfterOpenBracket: DontAlign
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
 DerivePointerAlignment: false
-PointerAlignment: Left
+PointerAlignment: Right
 ConstructorInitializerIndentWidth: 4
 AlignEscapedNewlinesLeft: true
 AlignTrailingComments: true
@@ -44,7 +44,7 @@ PointerBindsToType: true
 Cpp11BracedListStyle: true
 Standard:        Auto
 IndentWidth:     2
-TabWidth:        2
+TabWidth:        4
 UseTab:          Never
 BreakBeforeBraces: Custom
 BraceWrapping:   

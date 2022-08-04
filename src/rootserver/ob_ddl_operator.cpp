@@ -1203,7 +1203,6 @@ int ObDDLOperator::create_table(ObTableSchema& table_schema, ObMySQLTransaction&
     LOG_WARN("fail to gen new schema_version", K(ret), K(fetch_tenant_id));
   } else {
     table_schema.set_schema_version(new_schema_version);
-    // RS_LOG("ObDDLOperator::create_table", K(ddl_stmt_str));
     if (OB_FAIL(schema_service->get_table_sql_service().create_table(  // 这行代码我完全看不懂,淦
             table_schema,
             trans,

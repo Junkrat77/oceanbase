@@ -57,7 +57,7 @@ using namespace oceanbase::sql;
   {                                                                                                              \
     ObMySQLTransaction trans;                                                                                    \
     ret = trans.start(&db_initer_.get_sql_proxy());                                                              \
-    ret = multi_schema_service_.get_schema_service()->–().create_table(table_schema, trans); \
+    ret = multi_schema_service_.get_schema_service()->get_table_sql_service().create_table(table_schema, trans); \
     const bool commit = true;                                                                                    \
     ret = trans.end(commit);                                                                                     \
   }
