@@ -1105,7 +1105,6 @@ OB_INLINE int ObMPQuery::response_result(ObQueryExecCtx& query_ctx, bool force_s
         ctx_.is_execute_async_ = false;
       }
     } else if (need_trans_cb) {
-      LOG_TRACE("[gq] responese result in response_result ");
       ObAsyncPlanDriver drv(gctx_, ctx_, session, retry_ctrl_, *this);
       // NOTE: sql_end_cb must initialized before drv.response_result()
       ObSqlEndTransCb& sql_end_cb = session.get_mysql_end_trans_cb();
@@ -1116,7 +1115,6 @@ OB_INLINE int ObMPQuery::response_result(ObQueryExecCtx& query_ctx, bool force_s
       }
       async_resp_used = result.is_async_end_trans_submitted();
     } else {
-      LOG_TRACE("[gq] responese result in response_result ");
       ObSyncPlanDriver drv(gctx_, ctx_, session, retry_ctrl_, *this); /* query response */
       ret = drv.response_result(result);
     }
