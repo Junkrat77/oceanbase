@@ -46,6 +46,7 @@
 #include "rootserver/ob_partition_table_util.h"
 #include "rootserver/ob_leader_coordinator.h"
 #include "rootserver/ob_major_freeze_launcher.h"
+#include "rootserver/ob_metrics.h"
 #include "rootserver/ob_freeze_info_updater.h"
 #include "rootserver/ob_global_max_decided_trans_version_mgr.h"
 #include "rootserver/ob_vtable_location_getter.h"
@@ -674,6 +675,7 @@ public:
   bool is_stopping() const;
   bool is_start() const;
   share::status::ObRootServiceStatus get_status() const;
+  ObMetrics get_ob_metrics() const;
   bool in_debug() const
   {
     return debug_;
@@ -1334,6 +1336,8 @@ private:
   volatile bool server_refreshed_;  // server manager reload and force request heartbeat
   // use mysql server backend for debug.
   bool debug_;
+
+  ObMetrics ob_metrics;
 
   common::ObAddr self_addr_;
   common::ObServerConfig* config_;

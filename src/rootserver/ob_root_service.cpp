@@ -707,6 +707,7 @@ ObRootService::ObRootService()
     : inited_(false),
       server_refreshed_(false),
       debug_(false),
+      ob_metrics(),
       self_addr_(),
       config_(NULL),
       config_mgr_(NULL),
@@ -1676,6 +1677,11 @@ int ObRootService::start_service()
       ret = OB_ROOTSERVICE_EXIST;
       LOG_WARN("START_SERVICE: another root service in service", KR(ret));
     }
+  }
+
+  if (OB_SUCC(ret)) {
+    ob_metrics.ob_metrics_init();
+    // TODO: add if OB_FAIL
   }
 
   if (OB_SUCC(ret)) {
@@ -4190,6 +4196,7 @@ int ObRootService::logical_restore_partitions(const obrpc::ObRestorePartitionsAr
 int ObRootService::create_table(const ObCreateTableArg& arg, ObCreateTableRes& res)
 {
   LOG_DEBUG("receive create table arg", K(arg));
+  // ob_metrics.ob_metrics_increment(0);
   int ret = OB_SUCCESS;
   int64_t begin_time = ObTimeUtility::current_time();
   LOG_INFO("receive create table ddl", K(begin_time));

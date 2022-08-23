@@ -361,7 +361,7 @@ void ObThWorker::worker(int64_t& tenant_id, int64_t& req_recv_timestamp, int32_t
   int64_t wait_start_time = 0;
   int64_t wait_end_time = 0;
 
-  this_thread::set_monopoly();
+  oceanbase::lib::this_thread::set_monopoly();
   th_created();
 
   // Avoid adding and deleting entities from the root node for every request, the parameters are meaningless

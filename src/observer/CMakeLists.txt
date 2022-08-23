@@ -291,6 +291,8 @@ add_library(oceanbase_static
 target_link_libraries(oceanbase_static
   PUBLIC ob_version ob_base "${ob_objects}" ob_sql_server_parser_objects oblib easy)
 
+target_link_libraries(oceanbase_static INTERFACE -L/usr/local/lib64 -lprometheus-cpp-core -lprometheus-cpp-pull )
+
 if (OB_GPERF_MODE)
   target_link_libraries(oceanbase_static
   PRIVATE libprofiler.a)

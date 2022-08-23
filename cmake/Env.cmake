@@ -17,6 +17,7 @@ ob_define(OB_ENABLE_SERVER_PCH ${OB_ENABLE_PCH})
 ob_define(OB_ENABLE_UNITY ON)
 ob_define(OB_MAX_UNITY_BATCH_SIZE 30)
 ob_define(OB_USE_ASAN OFF)
+ob_define(OB_ENABLE_METRICS ON)
 
 ob_define(OB_RELEASEID 1)
 
@@ -28,6 +29,9 @@ set(DEBUG_PREFIX "-fdebug-prefix-map=${CMAKE_SOURCE_DIR}=.")
 
 set(LD_OPT "-Wl,--build-id=uuid")
 set(BUILD_OPT "${DEBUG_PREFIX}")
+if(OB_ENABLE_METRICS)
+  set(LD_OPT "${LD_OPT} -Wl,-rpath /usr/local/lib64")
+endif()
 
 if(${ARCHITECTURE} STREQUAL "sw_64")
   set(OB_USE_CLANG OFF)

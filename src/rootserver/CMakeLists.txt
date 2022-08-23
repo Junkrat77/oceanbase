@@ -32,6 +32,7 @@ ob_set_subtarget(ob_rootserver common
   ob_locality_util.cpp
   ob_lost_replica_checker.cpp
   ob_major_freeze_launcher.cpp
+  ob_metrics.cpp
   ob_migrate_unit.cpp
   ob_partition_balancer.cpp
   ob_partition_count_balancer.cpp

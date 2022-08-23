@@ -347,7 +347,7 @@ private:
   share::schema::ObMultiVersionSchemaService& schema_service_;
 
   // The Oceanbase rootserver manager
-  share::ObRsMgr rs_mgr_;
+  share::ObRsMgr rs_mgr_; // 维护master rs的位置信息
 
   // The SQL Engine
   sql::ObSql sql_engine_;
